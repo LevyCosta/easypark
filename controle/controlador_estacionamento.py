@@ -9,3 +9,7 @@ class ControladorEstacionamento:
         self.__controlador = controlador_sistema
         self.__tela_estacionamento = TelaEstacionamento(self)
         self.__continua_exibindo_tela = True
+
+
+    def abre_tela(self):
+        self.__tela_estacionamento.init_components()

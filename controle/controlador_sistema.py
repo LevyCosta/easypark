@@ -1,13 +1,13 @@
 import PySimpleGUI as sg
-from visual.tela_estacionamento import TelaEstacionamento
+from visual.tela_sistema import TelaSistema
 from controle.controlador_estacionamento import ControladorEstacionamento
 
 class ControladorSistema():
     __instance = None
 
     def __init__(self):
-        self.__tela_sistema = TelaEstacionamento(self)
-        self.__controlador_estacionamento = ControladorEstacionamento
+        self.__tela_sistema = TelaSistema(self)
+        self.__controlador_estacionamento = ControladorEstacionamento(self)
 
     def __new__(cls):
         if ControladorSistema.__instance is None:

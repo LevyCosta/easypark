@@ -3,24 +3,15 @@ import datetime
 
 class Estacionamento():
 
-    def __init__(self, vagasCarro: int, vagasMoto: int, valorDiariaCarro: float, valorDiariaMoto:float,
-                 valorHoraCarro: float, valorHoraMoto: float, valorPernoiteCarro: float, valorPernoiteMoto: float):
-        if isinstance(vagasCarro, int):
-            self.__vagasCarro = vagasCarro
-        if isinstance(vagasMoto, int):
-            self.__vagasMoto = vagasMoto
-        if isinstance(valorDiariaCarro, float):
-            self.__valorDiariaCarro = valorDiariaCarro
-        if isinstance(valorDiariaMoto, float):
-            self.__valorDiariaMoto = valorDiariaMoto
-        if isinstance(valorHoraCarro, float):
-            self.__valorHoraCarro = valorHoraCarro
-        if isinstance(valorHoraMoto, float):
-            self.__valorHoraMoto = valorHoraMoto
-        if isinstance(valorPernoiteCarro, float):
-            self.__valorPernoiteCarro = valorPernoiteCarro
-        if isinstance(valorPernoiteMoto, float):
-            self.__valorPernoiteMoto = valorPernoiteMoto
+    def __init__(self):
+        self.__vagasCarro = 0
+        self.__vagasMoto = 0
+        self.__valorDiariaCarro = 35.0
+        self.__valorDiariaMoto = 30.0
+        self.__valorHoraCarro = 8.0
+        self.__valorHoraMoto = 6.0
+        self.__valorPernoiteCarro = 35.0
+        self.__valorPernoiteMoto = 30.0
         self.__veiculosEstacionados = []
         self.__mensalistas = []
         self.__promocoes = []

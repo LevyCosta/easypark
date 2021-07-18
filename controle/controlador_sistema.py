@@ -18,14 +18,14 @@ class ControladorSistema():
         self.abre_tela()
 
     def abre_tela(self):
-        lista_opcoes = {'Vagas': self.opcao_vagas, 'Promoções': self.opcao_promocoes,
+        switcher = {'Vagas': self.opcao_vagas, 'Promoções': self.opcao_promocoes,
                         'Mensalistas': self.opcao_mensalistas, 'Sair': self.opcao_encerra}
 
         while True:
             button, values = self.__tela_sistema.open()
             if button == sg.WIN_CLOSED:
                 exit(0)
-            funcao_escolhida = lista_opcoes[button]
+            funcao_escolhida = switcher[button]
 
             funcao_escolhida()
 

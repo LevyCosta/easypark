@@ -13,8 +13,8 @@ class TelaEstacionamento():
         sg.ChangeLookAndFeel('Reddit')
         layout = [
             [sg.Text('EasyPark', justification='c', size=(20, 1), font=("Helvetica", 14))],
-            [sg.Text('Número de vagas para carros:'), sg.InputText(key='numCarro', default_text=str(self.__controlador.getNumeroVagasCarros()))],
-            [sg.Text('Número de vagas para moto:'), sg.InputText(key='numMoto', default_text=str(self.__controlador.getNumeroVagasMotos()))],
+            [sg.Text('Número de vagas para carros:'), sg.Input(key='numCarro', default_text=self.__controlador.getNumeroVagasCarros())],
+            [sg.Text('Número de vagas para moto:'), sg.Input(key='numMoto', default_text=self.__controlador.getNumeroVagasMotos())],
             [sg.Button('Salvar alterações'), sg.Button('Voltar')]
         ]
 
@@ -27,3 +27,6 @@ class TelaEstacionamento():
 
     def close(self):
             self.__window.Close()
+
+    def mensagemSucesso(self):
+        sg.PopupOK("Atualização realizada com sucesso!", title="Atualização de vagas")

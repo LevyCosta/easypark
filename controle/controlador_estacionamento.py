@@ -1,5 +1,6 @@
 from visual.tela_estacionamento import TelaEstacionamento
 from entidade.estacionamento import Estacionamento
+from DAO.estacionamento_DAO import EstacionamentoDAO
 import PySimpleGUI as sg
 
 class ControladorEstacionamento:
@@ -7,8 +8,9 @@ class ControladorEstacionamento:
 
     def __init__(self, controlador_sistema):
         self.__controlador = controlador_sistema
-        self.__estacionamento = Estacionamento()
+        self.__estacionamento = Estacionamento(0, 0)
         self.__tela_estacionamento = TelaEstacionamento(self)
+        self.__estacionamento_dao = EstacionamentoDAO()
         #self.__continua_exibindo_tela = True
 
 
@@ -21,16 +23,15 @@ class ControladorEstacionamento:
             button, values = self.__tela_estacionamento.open()
             if button == 'Voltar' or button == sg.WIN_CLOSED:
                 self.retorna()
-                self.__controlador.abre_tela()
             else:
                 funcao_escolhida = switcher[button]
                 if funcao_escolhida == self.alteraVagas:
                     carro = values['numCarro']
                     moto = values['numMoto']
-                    self.alteraVagas(carro, moto)
+                    self.alteraVagas(int(carro), int(moto))
                     self.retorna()
-                    self.__controlador.abre_tela()
-                #funcao_escolhida()
+
+                    #funcao_escolhida()
 
 
     def getNumeroVagasCarros(self):
@@ -47,7 +48,14 @@ class ControladorEstacionamento:
 
     def retorna(self):
         self.__tela_estacionamento.close()
+        self.__controlador.abre_tela()
 
     def alteraVagas(self, numCarros, numMotos):
-        self.setNumeroVagasMotos(numMotos)
-        self.setNumeroVagasCarros(numCarros)
+        #for estacionamento in self.__estacionamento_dao.get_all():
+            #if estacionamento.cod == 1:
+                #self.__estacionamento_dao.remove(estacionamento)
+            #self.__estacionamento = Estacionamento(numCarros, numMotos)
+        self.__estacionamento.setNumVagasCarro(numCarros)
+        self.__estacionamento.setNumVagasMoto(numMotos)
+            #self.__estacionamento_dao.add(self.__estacionamento)
+        self.__tela_estacionamento.mensagemSucesso()

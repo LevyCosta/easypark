@@ -12,7 +12,7 @@ class TelaSistema():
         sg.ChangeLookAndFeel('Reddit')
         layout = [
                     [sg.Text('', justification='c', size=(15, 1))],
-                    [sg.Text('EasyPark',justification='c', size=(20, 1), font=("Helvetica", 25))],
+                    [sg.Text('EasyPark', justification='c', size=(20, 1), font=("Helvetica", 25))],
                     [sg.Text('Escolha a opção: ')],
                     [sg.Button('Vagas', size=(15, 2), font=('Helvetica', 20))],
                     [sg.Button('Promoções', size=(15, 2), font=('Helvetica', 20))],

@@ -29,8 +29,7 @@ class ControladorPromocao:
         self.abre_tela_novo_editar()
 
     def salvar_desconto(self):
-        pass
-        sg.PopupOK('Desconto salvo com sucesso!', title='Novo Desconto')
+        sg.PopupOK('Não foi possível salvar essa promoção. Verifique e tente novamente!', title='Aviso')
 
     def retorna_tela_promo(self):
         self.__tela_promocao_novo_editar.close()

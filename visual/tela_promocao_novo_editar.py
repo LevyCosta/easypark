@@ -14,7 +14,7 @@ class TelaPromocaoNovoEditar:
             [sg.Text('Valor do Desconto (%): '), sg.InputText('')],
             [sg.Button('Salvar'), sg.Button('Cancelar')]
         ]
-        self.__window = sg.Window(title='Promoção', layout=layout_promo_novo, default_button_element_size=(20, 1), element_justification='l', size=(400, 400), resizable=True)
+        self.__window = sg.Window(title='Promoção', layout=layout_promo_novo, default_button_element_size=(20, 1), element_justification='l', size=(400, 200), resizable=True)
 
     def open(self):
         while True:

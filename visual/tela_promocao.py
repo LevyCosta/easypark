@@ -14,7 +14,7 @@ class TelaPromocao:
             [sg.Listbox(values=('Desconto para Carros de 15%', 'Desconto para Motos de 20%'), size=(30, 3))],
             [sg.Button('Novo'), sg.Button('Remover'), sg.Button('Editar'), sg.Button('Cancelar')]
         ]
-        self.__window = sg.Window(title='Promoções', layout=layout_promo, default_button_element_size=(20, 1), element_justification='c', size=(400, 400), resizable=True)
+        self.__window = sg.Window(title='Promoções', layout=layout_promo, default_button_element_size=(20, 1), element_justification='c', size=(400, 200), resizable=True)
 
     def open(self):
         while True:

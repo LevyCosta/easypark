@@ -21,7 +21,9 @@ class ControladorPromocao:
                 self.retorna()
             else:
                 funcao_escolhida = switcher[button]
+                self.__tela_promocao.close()
                 funcao_escolhida()
+
 
     def opcao_novo(self):
         switcher = {'Salvar': self.salvar_desconto, 'Cancelar': self.retorna_tela_promo}
@@ -33,13 +35,14 @@ class ControladorPromocao:
             else:
                 funcao_escolhida = switcher[button]
                 funcao_escolhida()
+                self.retorna_tela_promo()
 
     def salvar_desconto(self):
         pass
 
     def retorna_tela_promo(self):
         self.__tela_promocao_novo_editar.close()
-        self.__controlador.opcao_promocoes()
+        self.abre_tela()
 
     def retorna(self):
         self.__tela_promocao.close()

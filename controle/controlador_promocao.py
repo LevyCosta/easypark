@@ -26,19 +26,11 @@ class ControladorPromocao:
 
 
     def opcao_novo(self):
-        switcher = {'Salvar': self.salvar_desconto, 'Cancelar': self.retorna_tela_promo}
-        while True:
-            self.__tela_promocao_novo_editar.init_components()
-            button, values = self.__tela_promocao_novo_editar.open()
-            if button == 'Cancelar' or button == sg.WIN_CLOSED:
-                self.retorna_tela_promo()
-            else:
-                funcao_escolhida = switcher[button]
-                funcao_escolhida()
-                self.retorna_tela_promo()
+        self.abre_tela_novo_editar()
 
     def salvar_desconto(self):
         pass
+        sg.PopupOK('Desconto salvo com sucesso!', title='Novo Desconto')
 
     def retorna_tela_promo(self):
         self.__tela_promocao_novo_editar.close()
@@ -52,18 +44,24 @@ class ControladorPromocao:
         pass
 
     def opcao_editar(self):
-        switcher = {'Salvar': self.salvar_desconto, 'Cancelar': self.retorna}
-        while True:
-            button, values = self.__tela_promocao_novo_editar.open()
-            if button == sg.WIN_CLOSED:
-                self.encerra()
-            else:
-                funcao_escolhida = switcher[button]
-                funcao_escolhida()
+        self.abre_tela_novo_editar()
 
     def opcao_cancelar(self):
         self.__tela_promocao.close()
         self.__controlador.abre_tela()
+
+    def abre_tela_novo_editar(self):
+        switcher = {'Salvar': self.salvar_desconto, 'Cancelar': self.retorna_tela_promo}
+        while True:
+            self.__tela_promocao_novo_editar.init_components()
+            button, values = self.__tela_promocao_novo_editar.open()
+            if button == 'Cancelar' or button == sg.WIN_CLOSED:
+                self.__tela_promocao_novo_editar.close()
+                self.retorna_tela_promo()
+            else:
+                funcao_escolhida = switcher[button]
+                funcao_escolhida()
+                self.retorna_tela_promo()
 
     def encerra(self):
         exit(0)

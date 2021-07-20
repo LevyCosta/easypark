@@ -10,7 +10,7 @@ class TelaPromocaoNovoEditar:
     def init_components(self):
         sg.ChangeLookAndFeel('Reddit')
         layout_promo_novo = [
-            [sg.Text('Tipo de Veículo: ', size=(12, 1), font=('Helvetica', 10)), sg.Text('2 Radius Aqui')],
+            [sg.Text('Tipo de Veículo: ', size=(12, 1), font=('Helvetica', 10))], [sg.Radio('Carro', 'RADIO1', default=True), sg.Radio('Moto', 'RADIO1')],
             [sg.Text('Valor do Desconto (%): '), sg.InputText('')],
             [sg.Button('Salvar'), sg.Button('Cancelar')]
         ]

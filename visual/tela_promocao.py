@@ -10,9 +10,8 @@ class TelaPromocao:
     def init_components(self):
         sg.ChangeLookAndFeel('Reddit')
         layout_promo = [
-            [sg.Text('Promoções ativas:', size=(15, 1), font=('Helvetica', 12))],
-            [sg.Text('Promo Ativa 1 (só exemplo - achar a list correta)')],
-            [sg.Text('Promo Ativa 2')],
+            [sg.Text('Promoções Ativas', size=(15, 1), font=('Helvetica', 12))],
+            [sg.Listbox(values=('Desconto para Carros de 15%', 'Desconto para Motos de 20%'), size=(30, 3))],
             [sg.Button('Novo'), sg.Button('Remover'), sg.Button('Editar')]
         ]
         self.__window = sg.Window(title='Promoções', layout=layout_promo, default_button_element_size=(20, 1), element_justification='c', size=(400, 400), resizable=True)

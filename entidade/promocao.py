@@ -1,7 +1,7 @@
 
 class Promocao:
 
-    def __init__(self, tipoVeiculo, desconto):
+    def __init__(self, tipoVeiculo, desconto=0):
         self.__tipoVeiculo = tipoVeiculo
         self.__desconto = desconto
 

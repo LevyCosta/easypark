@@ -36,7 +36,7 @@ class ControladorSistema():
         self.__controlador_estacionamento.abre_tela()
 
     def opcao_promocoes(self):
-        self.__controlador_estacionamento.abre_tela()
+        self.__controlador_promocao.abre_tela()
 
     def opcao_mensalistas(self):
         self.__controlador_mensalistas.abre_tela_principal()

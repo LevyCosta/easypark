@@ -20,7 +20,6 @@ class ControladorSistema():
     def abre_tela(self):
         switcher = {'Vagas': self.opcao_vagas, 'Promoções': self.opcao_promocoes,
                         'Mensalistas': self.opcao_mensalistas, 'Sair': self.opcao_encerra}
-
         while True:
             button, values = self.__tela_sistema.open()
             if button == sg.WIN_CLOSED:

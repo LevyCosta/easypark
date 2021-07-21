@@ -52,7 +52,26 @@ class ControladorPromocao:
         pass
 
     def opcao_editar(self):
-        self.abre_tela_novo_editar()
+        self.abre_tela_editar()
+
+    def abre_tela_editar(self):
+        while True:
+            self.__tela_promocao_novo_editar.init_components()
+            button, values = self.__tela_promocao_novo_editar.open()
+            carro = values['_CARRO_']
+            moto = values['_MOTO_']
+            desconto = int(values['input_desconto'])
+            if button == 'Cancelar' or button == sg.WIN_CLOSED:
+                self.__tela_promocao_novo_editar.close()
+                self.retorna_tela_promo()
+            else:
+                valor_desconto = self.salvar_desconto(desconto)
+                veiculo = self.salvar_veiculo(carro, moto)
+                veiculo_desconto = self.salvar_desconto_tipo(veiculo)
+                self.alocar_atributo(veiculo_desconto, valor_desconto)
+                self.retorna_tela_promo()
+
+
 
     def opcao_cancelar(self):
         self.__tela_promocao.close()
@@ -73,7 +92,16 @@ class ControladorPromocao:
                 valor_desconto = self.salvar_desconto(desconto)
                 veiculo = self.salvar_veiculo(carro, moto)
                 veiculo_desconto = self.salvar_desconto_tipo(veiculo)
-                self.alocar_atributo(veiculo_desconto, valor_desconto)
+                if veiculo == 'carro' and self.__descontoCarro != 0:
+                    sg.PopupOK('Já existe um desconto de carro ativo! Não é possível fazer esta operação.',
+                               title='Aviso Carro')
+                    self.retorna_tela_promo()
+                elif veiculo == 'moto' and self.__descontoMoto != 0:
+                    sg.PopupOK('Já existe um desconto de moto ativo! Não é possível fazer esta operação.',
+                               title='Aviso Moto')
+                    self.retorna_tela_promo()
+                else:
+                    self.alocar_atributo(veiculo_desconto, valor_desconto)
                 #funcao_escolhida = switcher[button]
                 #funcao_escolhida()
                 self.retorna_tela_promo()

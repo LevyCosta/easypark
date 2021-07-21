@@ -3,6 +3,7 @@ from tkinter.constants import FALSE, X
 import PySimpleGUI as sg
 from visual.tela_mensalistas import TelaMensalistas
 from visual.tela_addMensalista import TelaAddMensalista
+from visual.tela_editMensalista import TelaEditMensalista
 from entidade.mensalista import Mensalista
 
 class ControladorMensalistas:
@@ -15,6 +16,7 @@ class ControladorMensalistas:
         self.__controlador = constrolador_sistema
         self.__tela_mensalistas = TelaMensalistas(self, self.__placas)
         self.__tela_addMensalista = TelaAddMensalista(self)
+        self.__tela_editMensalista = TelaEditMensalista(self)
         
 
     def abre_tela_principal(self):
@@ -26,20 +28,17 @@ class ControladorMensalistas:
             #print('hey')
             button, values = self.__tela_mensalistas.open()
             #print('hello')]
-            print(button)
             if button == None:
                 stillAdding = False
             else:
                 if button == 'novo':
-                    print('entrou novo')
                     self.abre_tela_addMensalista()
                 elif button == 'remover':
-                    print('entrou remover')
                     placa = values["placa"]
                     self.delMensalista(placa)
                 elif button == 'editar':
-                    print('entrou editar')
-                    self.editarMensalista()
+                    placa = values["placa"]
+                    self.abre_tela_editMensalista(placa)
             self.retorna()
         
 
@@ -49,58 +48,63 @@ class ControladorMensalistas:
         while added:
             self.__tela_addMensalista.init_components()
             button, values = self.__tela_addMensalista.open()
-            print(button)
-            print('valores: ', values)
             if button == 'Cancelar' or button == None:
                 added = False
             elif button == 'Salvar':
-                    print('entrou em salvar')
                     placa = values["placa"]
-                    print('placa a ser adicionada: ', placa)
                     self.addMensalistaToList(placa)
-                    #self.fechaAddMensalista()
-                    print(self.__mensalistas)
                     added = False
             self.fechaAddMensalista()
         
+    def abre_tela_editMensalista(self, placaEscolhida):
+        edited = True
+
+        while edited:
+            self.__tela_editMensalista.init_components(placaEscolhida)
+            button, values = self.__tela_editMensalista.open()
+            if button == 'Cancelar' or button == None:
+                edited = False
+            elif button == 'Salvar':
+                    placaNova = values["placaNova"]
+                    self.editMensalista(placaNova, placaEscolhida)
+                    edited = False
+            self.fechaEditMensalista()
 
     def addMensalista(self):
         self.abre_tela_addMensalista()
 
     def addMensalistaToList(self, placa):
-        print('placa prestes a ser add: ', placa)
-        p1 = Mensalista(placa)
-        print('p1.getplaca: ', p1.getPlaca)
-        self.__mensalistas.append(p1)
+        self.__mensalistas.append(Mensalista(placa))
         self.__placas.append(placa)
-        for x in range(len(self.__mensalistas)):
-            print('iteracao na lista de mens: ', self.__mensalistas[x].getPlaca())
+        #print('lista de placas de Mens: ', self.__mensalistas)
 
     def fechaAddMensalista(self):
         self.__tela_addMensalista.close()
+    
+    def fechaEditMensalista(self):
+        self.__tela_editMensalista.close()
 
     def delMensalista(self, placa):
-        #print('entrou no delete. placa: ', placa[0])
-        #print('lista de placas atual: ', self.__placas)
-        for x in range(len(self.__placas)):
-            #print('placa na iteração: ', self.__placas[x])
-            #print('tipo x do array: ', type(self.__placas[x]))
-            #print('tipo do placa: ', type(placa[0]))
-            #print('is: ', self.__placas[x] is placa[0], '  ==: ', self.__placas[x] == placa[0] )
+        #print('tamanho da lista de placas: ', len(self.__placas), '.')
+        #print('tamanho da lista de mensalistas: ', len(self.__mensalistas), '.')
+        for x in range(len(self.__placas) -1, -1, -1):
             if self.__placas[x] is placa[0]:
-                print('se igual, é esse: ', self.__placas[x])
+                #print('placa removed')
                 self.__placas.remove(placa[0])
+                
+                
+        for y in range(len(self.__mensalistas) -1, -1, -1):
+            if self.__mensalistas[y].getPlaca() == placa[0]:
+               self.__mensalistas.pop(y)  
+
 
        # self.__placas.pop()
-        print('entrando no loop')
-        for x in range(len(self.__mensalistas)):
-            if self.__mensalistas[x].getPlaca() == placa[0]:
-                self.__mensalistas.pop(x)
-                
-        print('lista de placas atual (mensalistas): ', self.__mensalistas)
+        
 
-    def editarMensalista(self):
-        pass
+    def editMensalista(self, placaNova, placaEscolhida): 
+        
+        self.addMensalistaToList(placaNova)
+        self.delMensalista(placaEscolhida)
 
     def getMensalistas(self):
         return self.__mensalistas

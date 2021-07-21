@@ -58,7 +58,13 @@ class ControladorEstacionamento:
         self.__tela_estacionamento.mensagemSucesso()
 
     def vagasCarroDAO(self):
-        return self.__estacionamento_dao.get(1).getNumVagasCarro()
+        try:
+            return self.__estacionamento_dao.get(1).getNumVagasCarro()
+        except AttributeError:
+            return 0
 
     def vagasMotoDAO(self):
-        return self.__estacionamento_dao.get(1).getNumVagasMoto()
+        try:
+            return self.__estacionamento_dao.get(1).getNumVagasMoto()
+        except AttributeError:
+            return 0

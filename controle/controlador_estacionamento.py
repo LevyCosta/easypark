@@ -9,10 +9,13 @@ class ControladorEstacionamento:
     def __init__(self, controlador_sistema):
         self.__controlador = controlador_sistema
         self.__estacionamento = Estacionamento(0, 0)
-        self.__tela_estacionamento = TelaEstacionamento(self)
         self.__estacionamento_dao = EstacionamentoDAO()
-        #self.__continua_exibindo_tela = True
+        self.__tela_estacionamento = TelaEstacionamento(self)
 
+    def __new__(cls, controlador_sistema):
+        if ControladorEstacionamento.__instance is None:
+            ControladorEstacionamento.__instance = object.__new__(cls)
+        return ControladorEstacionamento.__instance
 
     def abre_tela(self):
 
@@ -30,8 +33,6 @@ class ControladorEstacionamento:
                     moto = values['numMoto']
                     self.alteraVagas(int(carro), int(moto))
                     self.retorna()
-
-                    #funcao_escolhida()
 
 
     def getNumeroVagasCarros(self):
@@ -51,11 +52,13 @@ class ControladorEstacionamento:
         self.__controlador.abre_tela()
 
     def alteraVagas(self, numCarros, numMotos):
-        #for estacionamento in self.__estacionamento_dao.get_all():
-            #if estacionamento.cod == 1:
-                #self.__estacionamento_dao.remove(estacionamento)
-            #self.__estacionamento = Estacionamento(numCarros, numMotos)
         self.__estacionamento.setNumVagasCarro(numCarros)
         self.__estacionamento.setNumVagasMoto(numMotos)
-            #self.__estacionamento_dao.add(self.__estacionamento)
+        self.__estacionamento_dao.add(self.__estacionamento)
         self.__tela_estacionamento.mensagemSucesso()
+
+    def vagasCarroDAO(self):
+        return self.__estacionamento_dao.get(1).getNumVagasCarro()
+
+    def vagasMotoDAO(self):
+        return self.__estacionamento_dao.get(1).getNumVagasMoto()

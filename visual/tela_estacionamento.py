@@ -1,7 +1,7 @@
 import PySimpleGUI as sg
 
 
-class TelaEstacionamento():
+class TelaEstacionamento:
 
     def __init__(self, controlador_estacionamento):
         self.__controlador = controlador_estacionamento
@@ -10,6 +10,7 @@ class TelaEstacionamento():
 
     def init_components(self):
         sg.ChangeLookAndFeel('Reddit')
+
         layout = [
             [sg.Text('Informações gerais do estacionamento Park', justification='c', font=("Helvetica", 14))],
             [sg.Text(' ')],
@@ -24,8 +25,8 @@ class TelaEstacionamento():
             [sg.Text('Diária: R$25,00'), sg.Text('                          '), sg.Text('Diária: R$20,00')],
             [sg.Text('Pernoite: R$35,00'), sg.Text('                          '), sg.Text('Pernoite: R$30,00')],
             [sg.Text(' ')],
-            [sg.Text('Número de vagas para carros:'), sg.Input(key='numCarro', default_text=self.__controlador.getNumeroVagasCarros(), size=(10,5)),
-             sg.Text('Número de vagas para moto:'), sg.Input(key='numMoto', default_text=self.__controlador.getNumeroVagasMotos(), size=(10,5))],
+            [sg.Text('Número de vagas para carros:'), sg.Input(key='numCarro', default_text=self.__controlador.vagasCarroDAO(), size=(10,5)),
+             sg.Text('Número de vagas para moto:'), sg.Input(key='numMoto', default_text=self.__controlador.vagasMotoDAO(), size=(10,5))],
             [sg.Text(' ')],
             [sg.Button('Salvar alterações'), sg.Button('Voltar')]
         ]

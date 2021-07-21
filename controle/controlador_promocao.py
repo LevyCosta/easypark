@@ -11,8 +11,10 @@ class ControladorPromocao:
         self.__promocao = Promocao
         self.__tela_promocao = TelaPromocao(self)
         self.__tela_promocao_novo_editar = TelaPromocaoNovoEditar(self)
+        self.__descontoCarro = 0
+        self.__descontoMoto = 0
 
-    def abre_tela(self):
+    def abre_tela(self, desconto=0):
         switcher = {'Novo': self.opcao_novo, 'Remover': self.opcao_remover, 'Editar': self.opcao_editar, 'Cancelar': self.opcao_cancelar}
         while True:
             self.__tela_promocao.init_components()
@@ -24,12 +26,18 @@ class ControladorPromocao:
                 self.__tela_promocao.close()
                 funcao_escolhida()
 
-
     def opcao_novo(self):
         self.abre_tela_novo_editar()
 
-    def salvar_desconto(self):
-        sg.PopupOK('Não foi possível salvar essa promoção. Verifique e tente novamente!', title='Aviso')
+    def salvar_desconto(self, desconto=0):
+        sg.PopupOK(f'Desconto de {desconto}', title='Aviso')
+        self.__tela_promocao_novo_editar.close()
+        return desconto
+
+    def salvar_desconto_tipo(self, veiculo):
+        sg.PopupOK(f'Desconto para {veiculo}', title='Aviso')
+        self.__tela_promocao_novo_editar.close()
+        return veiculo
 
     def retorna_tela_promo(self):
         self.__tela_promocao_novo_editar.close()
@@ -50,17 +58,40 @@ class ControladorPromocao:
         self.__controlador.abre_tela()
 
     def abre_tela_novo_editar(self):
-        switcher = {'Salvar': self.salvar_desconto, 'Cancelar': self.retorna_tela_promo}
+        #switcher = {'Salvar': self.salvar_desconto, 'Cancelar': self.retorna_tela_promo}
         while True:
             self.__tela_promocao_novo_editar.init_components()
             button, values = self.__tela_promocao_novo_editar.open()
+            carro = values['_CARRO_']
+            moto = values['_MOTO_']
+            desconto = int(values['input_desconto'])
             if button == 'Cancelar' or button == sg.WIN_CLOSED:
                 self.__tela_promocao_novo_editar.close()
                 self.retorna_tela_promo()
             else:
-                funcao_escolhida = switcher[button]
-                funcao_escolhida()
+                valor_desconto = self.salvar_desconto(desconto)
+                veiculo = self.salvar_veiculo(carro, moto)
+                veiculo_desconto = self.salvar_desconto_tipo(veiculo)
+                self.alocar_atributo(veiculo_desconto, valor_desconto)
+                #funcao_escolhida = switcher[button]
+                #funcao_escolhida()
                 self.retorna_tela_promo()
+
+    def alocar_atributo(self, veiculo_desconto, valor_desconto):
+        if veiculo_desconto == 'carro':
+            self.__descontoCarro = valor_desconto
+            print(f'Veículo {veiculo_desconto}, desconto de {self.__descontoCarro}')
+        elif veiculo_desconto == 'moto':
+            self.__descontoCarro = valor_desconto
+            print(f'Veículo {veiculo_desconto}, desconto de {self.__descontoMoto}')
+
+    def salvar_veiculo(self, carro, moto):
+        if carro is False:
+            veiculo = 'moto'
+            return veiculo
+        else:
+            veiculo = 'carro'
+            return veiculo
 
     def encerra(self):
         exit(0)

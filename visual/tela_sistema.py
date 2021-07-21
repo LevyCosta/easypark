@@ -19,7 +19,7 @@ class TelaSistema():
                     [sg.Button('Mensalistas', size=(15, 2), font=('Helvetica', 20))],
                     [sg.Cancel('Sair', font=('Helvetica', 20), size=(15, 2), button_color=('white', 'red'))]
                 ]
-        self.__window = sg.Window('EasyPark', layout, default_button_element_size=(40, 1), element_justification='c', size=(800, 400), resizable=True).Finalize()
+        self.__window = sg.Window('EasyPark', layout, default_button_element_size=(40, 1), element_justification='c', size=(800, 500), resizable=True).Finalize()
         #self.__window.Maximize
 
     def open(self):

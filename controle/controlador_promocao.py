@@ -49,7 +49,8 @@ class ControladorPromocao:
         self.__controlador.abre_tela()
 
     def opcao_remover(self):
-        pass
+        self.__descontoCarro = 0
+        self.__descontoMoto = 0
 
     def opcao_editar(self):
         self.abre_tela_editar()
@@ -60,7 +61,11 @@ class ControladorPromocao:
             button, values = self.__tela_promocao_novo_editar.open()
             carro = values['_CARRO_']
             moto = values['_MOTO_']
-            desconto = int(values['input_desconto'])
+            desconto = values['input_desconto']
+            if desconto == '':
+                desconto = 0
+            else:
+                desconto = int(desconto)
             if button == 'Cancelar' or button == sg.WIN_CLOSED:
                 self.__tela_promocao_novo_editar.close()
                 self.retorna_tela_promo()
@@ -70,8 +75,6 @@ class ControladorPromocao:
                 veiculo_desconto = self.salvar_desconto_tipo(veiculo)
                 self.alocar_atributo(veiculo_desconto, valor_desconto)
                 self.retorna_tela_promo()
-
-
 
     def opcao_cancelar(self):
         self.__tela_promocao.close()
@@ -84,7 +87,11 @@ class ControladorPromocao:
             button, values = self.__tela_promocao_novo_editar.open()
             carro = values['_CARRO_']
             moto = values['_MOTO_']
-            desconto = int(values['input_desconto'])
+            desconto = values['input_desconto']
+            if desconto == '':
+                desconto = 0
+            else:
+                desconto = int(desconto)
             if button == 'Cancelar' or button == sg.WIN_CLOSED:
                 self.__tela_promocao_novo_editar.close()
                 self.retorna_tela_promo()

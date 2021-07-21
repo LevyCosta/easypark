@@ -14,10 +14,13 @@ class ControladorPromocao:
         self.__descontoCarro = 0
         self.__descontoMoto = 0
 
-    def abre_tela(self, desconto=0):
-        switcher = {'Novo': self.opcao_novo, 'Remover': self.opcao_remover, 'Editar': self.opcao_editar, 'Cancelar': self.opcao_cancelar}
+    def abre_tela(self):
+        switcher = {'Novo': self.opcao_novo,
+                    'Remover': self.opcao_remover,
+                    'Editar': self.opcao_editar,
+                    'Cancelar': self.opcao_cancelar}
         while True:
-            self.__tela_promocao.init_components()
+            self.__tela_promocao.init_components(self.__descontoCarro, self.__descontoMoto)
             button, values = self.__tela_promocao.open()
             if button == 'Cancelar' or button == sg.WIN_CLOSED:
                 self.retorna()

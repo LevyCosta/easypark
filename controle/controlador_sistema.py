@@ -1,6 +1,7 @@
 import PySimpleGUI as sg
 from visual.tela_sistema import TelaSistema
 from controle.controlador_estacionamento import ControladorEstacionamento
+from controle.controlador_mensalistas import ControladorMensalistas
 
 class ControladorSistema():
     __instance = None
@@ -8,6 +9,7 @@ class ControladorSistema():
     def __init__(self):
         self.__tela_sistema = TelaSistema(self)
         self.__controlador_estacionamento = ControladorEstacionamento(self)
+        self.__controlador_mensalistas = ControladorMensalistas(self)
 
     def __new__(cls):
         if ControladorSistema.__instance is None:
@@ -36,7 +38,7 @@ class ControladorSistema():
         pass
 
     def opcao_mensalistas(self):
-        pass
+        self.__controlador_mensalistas.abre_tela_principal()
 
     def opcao_encerra(self):
         exit(0)

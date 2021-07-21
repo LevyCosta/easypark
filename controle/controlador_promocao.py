@@ -8,11 +8,24 @@ class ControladorPromocao:
 
     def __init__(self, controlador_sistema):
         self.__controlador = controlador_sistema
-        self.__promocao = Promocao
+        self.__promocaoCarro = Promocao('carro', 0)         #atenção
+        self.__promocaoMoto = Promocao('moto', 0)          #atenção
         self.__tela_promocao = TelaPromocao(self)
         self.__tela_promocao_novo_editar = TelaPromocaoNovoEditar(self)
-        self.__descontoCarro = 0
-        self.__descontoMoto = 0
+#        self.__descontoCarro = 0
+#        self.__descontoMoto = 0
+
+    def get_desconto_carro(self):
+        return self.__promocaoCarro.getDesconto()
+
+    def set_desconto_carro(self, descontoCarro):
+        self.__promocaoCarro.setDesconto(descontoCarro)
+
+    def get_desconto_moto(self):
+        return self.__promocaoMoto.getDesconto()
+
+    def set_desconto_moto(self, descontoMoto):
+        self.__promocaoMoto.setDesconto(descontoMoto)
 
     def abre_tela(self):
         switcher = {'Novo': self.opcao_novo,
@@ -20,7 +33,8 @@ class ControladorPromocao:
                     'Editar': self.opcao_editar,
                     'Cancelar': self.opcao_cancelar}
         while True:
-            self.__tela_promocao.init_components(self.__descontoCarro, self.__descontoMoto)
+ #           self.__tela_promocao.init_components(self.__descontoCarro, self.__descontoMoto)
+            self.__tela_promocao.init_components(self.get_desconto_carro(), self.get_desconto_moto())
             button, values = self.__tela_promocao.open()
             if button == 'Cancelar' or button == sg.WIN_CLOSED:
                 self.retorna()
@@ -49,8 +63,12 @@ class ControladorPromocao:
         self.__controlador.abre_tela()
 
     def opcao_remover(self):
-        self.__descontoCarro = 0
-        self.__descontoMoto = 0
+        self.set_desconto_moto(0)
+        self.set_desconto_carro(0)
+
+#    def opcao_remover(self):
+#        self.__descontoCarro = 0
+#        self.__descontoMoto = 0
 
     def opcao_editar(self):
         self.abre_tela_editar()
@@ -72,8 +90,12 @@ class ControladorPromocao:
             else:
                 valor_desconto = self.salvar_desconto(desconto)
                 veiculo = self.salvar_veiculo(carro, moto)
-                veiculo_desconto = self.salvar_desconto_tipo(veiculo)
-                self.alocar_atributo(veiculo_desconto, valor_desconto)
+#                veiculo_desconto = self.salvar_desconto_tipo(veiculo)
+                if veiculo == 'moto':
+                    self.set_desconto_moto(valor_desconto)
+                elif veiculo == 'carro':
+                    self.set_desconto_carro(valor_desconto)
+                #self.alocar_atributo(veiculo_desconto, valor_desconto)
                 self.retorna_tela_promo()
 
     def opcao_cancelar(self):
@@ -99,16 +121,21 @@ class ControladorPromocao:
                 valor_desconto = self.salvar_desconto(desconto)
                 veiculo = self.salvar_veiculo(carro, moto)
                 veiculo_desconto = self.salvar_desconto_tipo(veiculo)
-                if veiculo == 'carro' and self.__descontoCarro != 0:
-                    sg.PopupOK('Já existe um desconto de carro ativo! Não é possível fazer esta operação.',
+#                if veiculo == 'carro' and self.__descontoCarro != 0:
+                if veiculo == 'carro':
+                    if self.get_desconto_carro() != 0:
+                        sg.PopupOK('Já existe um desconto de carro ativo! Não é possível fazer esta operação.',
                                title='Aviso Carro')
-                    self.retorna_tela_promo()
-                elif veiculo == 'moto' and self.__descontoMoto != 0:
-                    sg.PopupOK('Já existe um desconto de moto ativo! Não é possível fazer esta operação.',
+                        self.retorna_tela_promo()
+                    else:
+                        self.set_desconto_carro(valor_desconto)
+                elif veiculo == 'moto':
+                    if self.get_desconto_moto() != 0:
+                        sg.PopupOK('Já existe um desconto de moto ativo! Não é possível fazer esta operação.',
                                title='Aviso Moto')
-                    self.retorna_tela_promo()
-                else:
-                    self.alocar_atributo(veiculo_desconto, valor_desconto)
+                        self.retorna_tela_promo()
+                    else:
+                        self.set_desconto_moto(valor_desconto)
                 #funcao_escolhida = switcher[button]
                 #funcao_escolhida()
                 self.retorna_tela_promo()

@@ -74,24 +74,30 @@ class ControladorMensalistas:
         self.__mensalistas.append(p1)
         self.__placas.append(placa)
         for x in range(len(self.__mensalistas)):
-            print('iteracao na lista de mens: ', self.__mensalistas[x].getPlaca)
+            print('iteracao na lista de mens: ', self.__mensalistas[x].getPlaca())
 
     def fechaAddMensalista(self):
         self.__tela_addMensalista.close()
 
     def delMensalista(self, placa):
-        print('entrou no delete. placa: ', placa)
-        print('lista de placas atual: ', self.__placas)
+        #print('entrou no delete. placa: ', placa[0])
+        #print('lista de placas atual: ', self.__placas)
         for x in range(len(self.__placas)):
-            print('placa na iteração: ', self.__placas[x])
-            if self.__placas[x] == placa:
+            #print('placa na iteração: ', self.__placas[x])
+            #print('tipo x do array: ', type(self.__placas[x]))
+            #print('tipo do placa: ', type(placa[0]))
+            #print('is: ', self.__placas[x] is placa[0], '  ==: ', self.__placas[x] == placa[0] )
+            if self.__placas[x] is placa[0]:
                 print('se igual, é esse: ', self.__placas[x])
+                self.__placas.remove(placa[0])
 
        # self.__placas.pop()
         print('entrando no loop')
         for x in range(len(self.__mensalistas)):
-            if self.__mensalistas[x].getPlaca() == placa:
+            if self.__mensalistas[x].getPlaca() == placa[0]:
                 self.__mensalistas.pop(x)
+                
+        print('lista de placas atual (mensalistas): ', self.__mensalistas)
 
     def editarMensalista(self):
         pass
@@ -105,7 +111,7 @@ class ControladorMensalistas:
     def updatePlacas(self):
         for x in range(len(self.__mensalistas)):
             if self.__mensalistas[x].getPlaca() not in self.__placas:
-                self.__placas.append(self.__mensalistas[x])
+                self.__placas.append(self.__mensalistas[x].getPlaca())
 
     def retorna(self):
         self.__tela_mensalistas.close()

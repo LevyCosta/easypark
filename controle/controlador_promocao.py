@@ -30,12 +30,10 @@ class ControladorPromocao:
         self.abre_tela_novo_editar()
 
     def salvar_desconto(self, desconto=0):
-        sg.PopupOK(f'Desconto de {desconto}', title='Aviso')
         self.__tela_promocao_novo_editar.close()
         return desconto
 
     def salvar_desconto_tipo(self, veiculo):
-        sg.PopupOK(f'Desconto para {veiculo}', title='Aviso')
         self.__tela_promocao_novo_editar.close()
         return veiculo
 
@@ -82,14 +80,14 @@ class ControladorPromocao:
             self.__descontoCarro = valor_desconto
             print(f'Veículo {veiculo_desconto}, desconto de {self.__descontoCarro}')
         elif veiculo_desconto == 'moto':
-            self.__descontoCarro = valor_desconto
+            self.__descontoMoto = valor_desconto
             print(f'Veículo {veiculo_desconto}, desconto de {self.__descontoMoto}')
 
     def salvar_veiculo(self, carro, moto):
         if carro is False:
             veiculo = 'moto'
             return veiculo
-        else:
+        elif moto is False:
             veiculo = 'carro'
             return veiculo
 

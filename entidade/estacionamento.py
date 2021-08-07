@@ -3,35 +3,34 @@ import datetime
 
 class Estacionamento():
 
-    def __init__(self, numVagasCarro: int, numVagasMoto: int):
+    def __init__(self, vagasCarro: int, vagasMoto: int):
         self.__cod = 1
-        if isinstance(numVagasCarro, int):
-            self.__numVagasCarro = numVagasCarro
-        if isinstance(numVagasMoto, int):
-            self.__numVagasMoto = numVagasMoto
+        if isinstance(vagasCarro, int):
+            self.__vagasCarro = vagasCarro
+        if isinstance(vagasMoto, int):
+            self.__vagasMoto = vagasMoto
         self.__valorDiariaCarro = 35.0
         self.__valorDiariaMoto = 30.0
         self.__valorHoraCarro = 8.0
         self.__valorHoraMoto = 6.0
         self.__valorPernoiteCarro = 35.0
         self.__valorPernoiteMoto = 30.0
-        self.__carrosEstacionados = [] #quando add a este array, limitar a numVagasCarro
-        self.__motosEstacionadas = [] #quando add a este array, limitar a numVagasMoto
+        self.__veiculosEstacionados = []
         self.__mensalistas = []
         self.__promocoes = []
         self.__relatorios = []
 
-    def getNumVagasCarro(self):
-        return self.__numVagasCarro
+    def getVagasCarro(self):
+        return self.__vagasCarro
 
-    def setNumVagasCarro(self, vagas):
-        self.__numVagasCarro = vagas
+    def setVagasCarro(self, vagas):
+        self.__vagasCarro = vagas
 
-    def getNumVagasMoto(self):
-        return self.__numVagasMoto
+    def getVagasMoto(self):
+        return self.__vagasMoto
 
-    def setNumVagasMoto(self, vagas):
-        self.__numVagasMoto = vagas
+    def setVagasMoto(self, vagas):
+        self.__vagasMoto = vagas
 
     @property
     def cod(self):

@@ -3,6 +3,7 @@ from entidade.estacionamento import Estacionamento
 from DAO.estacionamento_DAO import EstacionamentoDAO
 import PySimpleGUI as sg
 
+
 class ControladorEstacionamento:
     __instance = None
 
@@ -36,35 +37,35 @@ class ControladorEstacionamento:
 
 
     def getNumeroVagasCarros(self):
-        return self.__estacionamento.getNumVagasCarro()
+        return self.__estacionamento.getVagasCarro()
 
     def setNumeroVagasCarros(self, vagas):
-        self.__estacionamento.setNumVagasCarro(vagas)
+        self.__estacionamento.setVagasCarro(vagas)
 
     def getNumeroVagasMotos(self):
-        return self.__estacionamento.getNumVagasMoto()
+        return self.__estacionamento.getVagasMoto()
 
     def setNumeroVagasMotos(self, vagas):
-        self.__estacionamento.setNumVagasMoto(vagas)
+        self.__estacionamento.setVagasMoto(vagas)
 
     def retorna(self):
         self.__tela_estacionamento.close()
         self.__controlador.abre_tela()
 
     def alteraVagas(self, numCarros, numMotos):
-        self.__estacionamento.setNumVagasCarro(numCarros)
-        self.__estacionamento.setNumVagasMoto(numMotos)
+        self.__estacionamento.setVagasCarro(numCarros)
+        self.__estacionamento.setVagasMoto(numMotos)
         self.__estacionamento_dao.add(self.__estacionamento)
         self.__tela_estacionamento.mensagemSucesso()
 
     def vagasCarroDAO(self):
         try:
-            return self.__estacionamento_dao.get(1).getNumVagasCarro()
+            return self.__estacionamento_dao.get(1).getVagasCarro()
         except AttributeError:
             return 0
 
     def vagasMotoDAO(self):
         try:
-            return self.__estacionamento_dao.get(1).getNumVagasMoto()
+            return self.__estacionamento_dao.get(1).getVagasMoto()
         except AttributeError:
             return 0

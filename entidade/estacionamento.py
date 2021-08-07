@@ -9,10 +9,14 @@ class Estacionamento():
             self.__vagasCarro = vagasCarro
         if isinstance(vagasMoto, int):
             self.__vagasMoto = vagasMoto
-        self.__valorDiariaCarro = 35.0
-        self.__valorDiariaMoto = 30.0
-        self.__valorHoraCarro = 8.0
-        self.__valorHoraMoto = 6.0
+        self.__valorDiariaCarroSemana = 35.0
+        self.__valorDiariaCarroFinde = 25.0
+        self.__valorDiariaMotoSemana = 30.0
+        self.__valorDiariaMotoFinde = 20.0
+        self.__valorHoraCarroSemana = 8.0
+        self.__valorHoraCarroFinde = 4.0
+        self.__valorHoraMotoSemana = 6.0
+        self.__valorHoraMotoFinde = 3.0
         self.__valorPernoiteCarro = 35.0
         self.__valorPernoiteMoto = 30.0
         self.__veiculosEstacionados = []

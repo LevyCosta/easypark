@@ -23,6 +23,7 @@ class Estacionamento():
         self.__mensalistas = []
         self.__promocoes = []
         self.__relatorios = []
+        self.__sorteados = []
 
     def getVagasCarro(self):
         return self.__vagasCarro

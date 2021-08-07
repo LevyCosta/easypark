@@ -32,9 +32,12 @@ class ControladorEstacionamento:
                 if funcao_escolhida == self.alteraVagas:
                     carro = values['numCarro']
                     moto = values['numMoto']
-                    self.alteraVagas(int(carro), int(moto))
-                    self.retorna()
-
+                    try:
+                        self.alteraVagas(int(carro), int(moto))
+                        self.retorna()
+                    except ValueError:
+                        sg.popup("Digite apenas números inteiros!")
+                        self.__tela_estacionamento.close()
 
     def getNumeroVagasCarros(self):
         return self.__estacionamento.getVagasCarro()

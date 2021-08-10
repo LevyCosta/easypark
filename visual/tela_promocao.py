@@ -12,11 +12,11 @@ class TelaPromocao:
         layout_promo = [
             [sg.Text('Promoções Ativas', size=(15, 1), font=('Helvetica', 12))],
             [sg.Listbox(values=(f'Desconto para Carros de {descontoCarro}%',
-                                f'Desconto para Motos de {descontoMoto}%'))],
+                                f'Desconto para Motos de {descontoMoto}%'), size=(30, 4))],
             [sg.Button('Novo'), sg.Button('Remover'), sg.Button('Editar'), sg.Button('Cancelar')]
         ]
         self.__window = sg.Window(title='Promoções', layout=layout_promo, default_button_element_size=(20, 1),
-                                  element_justification='c', size=(400, 300), resizable=True)
+                                  element_justification='c', size=(400, 200), resizable=True)
 
     def open(self):
         while True:

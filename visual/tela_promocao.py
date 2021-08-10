@@ -7,12 +7,12 @@ class TelaPromocao:
         self.__window = None
         self.init_components()
 
-    def init_components(self, descontoCarro=0, descontoMoto=0):
+    def init_components(self, desconto_carro=0, desconto_moto=0):
         sg.ChangeLookAndFeel('Reddit')
         layout_promo = [
             [sg.Text('Promoções Ativas', size=(15, 1), font=('Helvetica', 12))],
-            [sg.Listbox(values=(f'Desconto para Carros de {descontoCarro}%',
-                                f'Desconto para Motos de {descontoMoto}%'), size=(30, 4))],
+            [sg.Listbox(values=(f'Desconto para Carros de {desconto_carro}%',
+                                f'Desconto para Motos de {desconto_moto}%'), size=(30, 4))],
             [sg.Button('Novo'), sg.Button('Remover'), sg.Button('Editar'), sg.Button('Cancelar')]
         ]
         self.__window = sg.Window(title='Promoções', layout=layout_promo, default_button_element_size=(20, 1),

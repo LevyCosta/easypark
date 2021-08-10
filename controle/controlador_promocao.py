@@ -2,6 +2,7 @@ from visual.tela_promocao import TelaPromocao
 from visual.tela_promocao_novo_editar import TelaPromocaoNovoEditar
 from entidade.promocao import Promocao
 import PySimpleGUI as sg
+import pandas
 
 class ControladorPromocao:
     __instance = None
@@ -12,18 +13,22 @@ class ControladorPromocao:
         self.__promocaoMoto = Promocao('moto', 0)
         self.__tela_promocao = TelaPromocao(self)
         self.__tela_promocao_novo_editar = TelaPromocaoNovoEditar(self)
+        self.__arquivo_carro = self.ler_promocarro_arquivo()
+        self.__arquivo_moto = self.ler_promomoto_arquivo()
 
     def get_desconto_carro(self):
         return self.__promocaoCarro.getDesconto()
 
-    def set_desconto_carro(self, descontoCarro):
-        self.__promocaoCarro.setDesconto(descontoCarro)
+    def set_desconto_carro(self, desconto_carro):
+        self.__promocaoCarro.setDesconto(desconto_carro)
+        self.salvar_promocarro_arquivo(desconto_carro)
 
     def get_desconto_moto(self):
         return self.__promocaoMoto.getDesconto()
 
-    def set_desconto_moto(self, descontoMoto):
-        self.__promocaoMoto.setDesconto(descontoMoto)
+    def set_desconto_moto(self, desconto_moto):
+        self.__promocaoMoto.setDesconto(desconto_moto)
+        self.salvar_promomoto_arquivo(desconto_moto)
 
     def abre_tela(self):
         switcher = {'Novo': self.opcao_novo,
@@ -31,7 +36,7 @@ class ControladorPromocao:
                     'Editar': self.opcao_editar,
                     'Cancelar': self.opcao_cancelar}
         while True:
-            self.__tela_promocao.init_components(self.get_desconto_carro(), self.get_desconto_moto())
+            self.__tela_promocao.init_components(self.__arquivo_carro, self.__arquivo_moto)
             button, values = self.__tela_promocao.open()
             if button == 'Cancelar' or button == sg.WIN_CLOSED:
                 self.retorna()
@@ -60,8 +65,20 @@ class ControladorPromocao:
         self.__controlador.abre_tela()
 
     def opcao_remover(self):
-        self.set_desconto_moto(0)
+        self.remover_carro()
+        self.remover_moto()
+
+    def remover_carro(self):
         self.set_desconto_carro(0)
+        self.remover_promocarro_arquivo()
+        self.__arquivo_carro = self.ler_promocarro_arquivo()
+        return self.__arquivo_carro
+
+    def remover_moto(self):
+        self.set_desconto_moto(0)
+        self.remover_promomoto_arquivo()
+        self.__arquivo_moto = self.ler_promocarro_arquivo()
+        return self.__arquivo_moto
 
     def opcao_editar(self):
         self.abre_tela_editar()
@@ -170,3 +187,37 @@ class ControladorPromocao:
 
     def encerra(self):
         exit(0)
+
+    def salvar_promocarro_arquivo(self, desconto_carro):
+        with open("arquivo_carro.txt", mode="w") as file:
+            desconto_carro_string = str(desconto_carro)
+            file.write(desconto_carro_string)
+        self.__arquivo_carro = self.ler_promocarro_arquivo()
+        return self.__arquivo_carro
+
+    def ler_promocarro_arquivo(self):
+        with open("arquivo_carro.txt", mode="r") as file:
+            conteudo_carro = file.read()
+            return conteudo_carro
+
+    def remover_promocarro_arquivo(self):
+        with open("arquivo_carro.txt", mode="w") as file:
+            file.write("0.0")
+
+    def salvar_promomoto_arquivo(self, desconto_moto):
+        with open("arquivo_moto.txt", mode="w") as file:
+            desconto_moto_string = str(desconto_moto)
+            file.write(desconto_moto_string)
+        self.__arquivo_moto = self.ler_promomoto_arquivo()
+        return self.__arquivo_moto
+
+    def ler_promomoto_arquivo(self):
+        with open("arquivo_moto.txt", mode="r") as file:
+            conteudo_moto = file.read()
+            return conteudo_moto
+
+    def remover_promomoto_arquivo(self):
+        with open("arquivo_moto.txt", mode="w") as file:
+            file.write("0.0")
+
+

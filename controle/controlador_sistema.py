@@ -25,11 +25,12 @@ class ControladorSistema():
         switcher = {'Definir Vagas': self.opcao_vagas,
                     'Registrar Entrada': self.opcao_entrada,
                     'Registrar Saída': self.opcao_saida,
-                    'Consultar Veículos Estacionados': self.opcao_consultar_estacionado,
+                    'Consultar Veículo Estacionado': self.opcao_consultar_estacionado,
                     'Consultar Valor': self.opcao_consultar_valor,
                     'Cadastrar Promoção': self.opcao_promocoes,
                     'Cadastrar Mensalista': self.opcao_mensalistas,
                     'Realizar Sorteio': self.opcao_sorteio,
+                    'Gerar Relatório': self.opcao_relatorio,
                     'Sair': self.opcao_encerra}
         while True:
             button, values = self.__tela_sistema.open()
@@ -51,6 +52,9 @@ class ControladorSistema():
         pass
 
     def opcao_sorteio(self):
+        pass
+
+    def opcao_relatorio(self):
         pass
 
     def opcao_vagas(self):

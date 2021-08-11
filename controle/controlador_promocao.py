@@ -2,7 +2,7 @@ from visual.tela_promocao import TelaPromocao
 from visual.tela_promocao_novo_editar import TelaPromocaoNovoEditar
 from entidade.promocao import Promocao
 import PySimpleGUI as sg
-import pandas
+
 
 class ControladorPromocao:
     __instance = None

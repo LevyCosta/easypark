@@ -22,15 +22,36 @@ class ControladorSistema():
         self.abre_tela()
 
     def abre_tela(self):
-        switcher = {'Vagas': self.opcao_vagas, 'Promoções': self.opcao_promocoes,
-                        'Mensalistas': self.opcao_mensalistas, 'Sair': self.opcao_encerra}
+        switcher = {'Definir Vagas': self.opcao_vagas,
+                    'Registrar Entrada': self.opcao_entrada,
+                    'Registrar Saída': self.opcao_saida,
+                    'Consultar Veículos Estacionados': self.opcao_consultar_estacionado,
+                    'Consultar Valor': self.opcao_consultar_valor,
+                    'Cadastrar Promoção': self.opcao_promocoes,
+                    'Cadastrar Mensalista': self.opcao_mensalistas,
+                    'Realizar Sorteio': self.opcao_sorteio,
+                    'Sair': self.opcao_encerra}
         while True:
             button, values = self.__tela_sistema.open()
             if button == sg.WIN_CLOSED:
-                exit(0)
+                self.opcao_encerra()
             funcao_escolhida = switcher[button]
-
             funcao_escolhida()
+
+    def opcao_entrada(self):
+        pass
+
+    def opcao_saida(self):
+        pass
+
+    def opcao_consultar_estacionado(self):
+        pass
+
+    def opcao_consultar_valor(self):
+        pass
+
+    def opcao_sorteio(self):
+        pass
 
     def opcao_vagas(self):
         self.__controlador_estacionamento.abre_tela()

@@ -1,6 +1,5 @@
 import datetime
 
-
 class Estacionamento():
 
     def __init__(self, vagasCarro: int, vagasMoto: int):

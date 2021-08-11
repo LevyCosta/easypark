@@ -14,12 +14,19 @@ class TelaSistema():
                     [sg.Text('', justification='c', size=(15, 1))],
                     [sg.Text('EasyPark', justification='c', size=(20, 1), font=("Helvetica", 25))],
                     [sg.Text('Escolha a opção: ')],
-                    [sg.Button('Vagas', size=(15, 2), font=('Helvetica', 20))],
-                    [sg.Button('Promoções', size=(15, 2), font=('Helvetica', 20))],
-                    [sg.Button('Mensalistas', size=(15, 2), font=('Helvetica', 20))],
-                    [sg.Cancel('Sair', font=('Helvetica', 20), size=(15, 2), button_color=('white', 'red'))]
+                    [sg.Button('Definir Vagas', size=(25, 2), font=('Helvetica', 10))],
+                    [sg.Button('Registrar Entrada', size=(25, 2), font=('Helvetica', 10))],
+                    [sg.Button('Registrar Saída', size=(25, 2), font=('Helvetica', 10))],
+                    [sg.Button('Consultar Veículo Estacionado', size=(25, 2), font=('Helvetica', 10))],
+                    [sg.Button('Consultar Valor', size=(25, 2), font=('Helvetica', 10))],
+                    [sg.Button('Cadastrar Promoção', size=(25, 2), font=('Helvetica', 10))],
+                    [sg.Button('Cadastrar Mensalista', size=(25, 2), font=('Helvetica', 10))],
+                    [sg.Button('Realizar Sorteio', size=(25, 2), font=('Helvetica', 10))],
+                    [sg.Button('Gerar Relatório', size=(25, 2), font=('Helvetica', 10))],
+                    [sg.Cancel('Sair', font=('Helvetica', 10), size=(25, 2), button_color=('white', 'red'))]
                 ]
-        self.__window = sg.Window('EasyPark', layout, default_button_element_size=(40, 1), element_justification='c', size=(800, 500), resizable=True).Finalize()
+        self.__window = sg.Window('EasyPark', layout, default_button_element_size=(40, 1), element_justification='c',
+                                  size=(600, 630), resizable=True).Finalize()
         #self.__window.Maximize
 
     def open(self):

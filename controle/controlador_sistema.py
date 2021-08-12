@@ -3,6 +3,7 @@ from visual.tela_sistema import TelaSistema
 from controle.controlador_estacionamento import ControladorEstacionamento
 from controle.controlador_mensalistas import ControladorMensalistas
 from controle.controlador_promocao import ControladorPromocao
+from controle.controlador_entrada import ControladorEntrada
 
 class ControladorSistema():
     __instance = None
@@ -12,6 +13,7 @@ class ControladorSistema():
         self.__controlador_estacionamento = ControladorEstacionamento(self)
         self.__controlador_mensalistas = ControladorMensalistas(self)
         self.__controlador_promocao = ControladorPromocao(self)
+        self.__controlador_entrada = ControladorEntrada(self)
 
     def __new__(cls):
         if ControladorSistema.__instance is None:
@@ -40,7 +42,7 @@ class ControladorSistema():
             funcao_escolhida()
 
     def opcao_entrada(self):
-        pass
+        self.__controlador_entrada.abre_tela()
 
     def opcao_saida(self):
         pass
